@@ -34,7 +34,9 @@ class ProfileController extends Controller
         }
         
         if ($request->hasFile('picture')) {
-            Storage::delete($request->user()->picture);
+            if ($request->user()->picture != null) {
+                Storage::delete($request->user()->picture);
+            }
             $path = $request->file('picture')->storePublicly('profile_pictures');
             $request->user()->fill(['picture' => $path]);
         }

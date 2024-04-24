@@ -21,6 +21,27 @@
                     <x-input-error :messages="$errors->get('email')" class="mt-2" />
                 </div>
 
+                <!-- Postcode -->
+                <div class="mt-4">
+                    <x-input-label for="postcode" :value="__('Postcode')" />
+
+                    <x-text-input id="postcode" class="block mt-1 w-full" type="text" name="postcode" required />
+
+                    <x-input-error :messages="$errors->get('postcode')" class="mt-2" />
+                </div>
+
+                <!-- Role -->
+                <!-- <div class="flex flex-row mt-4">
+                    <input type="radio" id="age1" name="age" value="30" default>
+                    <label for="age1">0 - 30</label><br>
+                    <input type="radio" id="age2" name="age" value="60">
+                    <label for="age2">31 - 60</label><br>
+                    <input type="radio" id="age3" name="age" value="100">
+                    <label for="age3">61 - 100</label><br><br>
+                </div> -->
+                
+                <input name="role" value="1" hidden />
+
                 <!-- Password -->
                 <div class="mt-4">
                     <x-input-label for="password" :value="__('Password')" />

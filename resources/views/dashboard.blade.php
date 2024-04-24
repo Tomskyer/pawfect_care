@@ -19,38 +19,54 @@
         </div>
         @endforeach
         <?php
-        $address = "16-18, Argyle Street, Camden, London, WC1H 8EG, United Kingdom";
-        $result = app('geocoder')->geocode($address)->get();
+        $postcode = "ST179TA";
+        $result = app('geocoder')->geocode($postcode)->get();
         $coordinates = $result[0]->getCoordinates();
         $lat = $coordinates->getLatitude();
         $lng = $coordinates->getLongitude();
 
         ?>
-        <h1>Lat: {{ $lat }} Long: {{ $lng }}</h1>
         <div class="container mt-5">
             <div id="map"></div>
         </div>
 
         <script type="text/javascript">
             function initMap() {
-                //You can change LAT and LNG according to you're requirement
-                const latLng = {
+                const latLng1 = {
                     lat: <?php echo $lat; ?>,
                     lng: <?php echo $lng; ?>
                 };
 
-                console.log(latLng);
+                const latLng2 = {
+                    lat: 0,
+                    lng: -50
+                };
 
                 const map = new google.maps.Map(document.getElementById("map"), {
-                    zoom: 14,
-                    center: latLng,
+                    zoom: 16,
+                    center: latLng1,
                 });
 
                 new google.maps.Marker({
-                    position: latLng,
+                    position: latLng1,
                     map,
-                    title: "Location",
+                    title: "Profile's Location",
                 });
+
+                new google.maps.Marker({
+                    position: latLng2,
+                    map,
+                    title: "Your Location",
+                    icon: {
+                        path: google.maps.SymbolPath.CIRCLE,
+                        scale: 10,
+                        fillOpacity: 1,
+                        strokeWeight: 2,
+                        fillColor: '#5384ED',
+                        strokeColor: '#ffffff',
+                    },
+                });
+
             }
 
             window.initMap = initMap;

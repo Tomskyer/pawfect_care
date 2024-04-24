@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Axlon\PostalCodeValidation\ValidationServiceProvider;
 
 class RegisteredUserController extends Controller
 {
@@ -35,6 +36,7 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'picture' => ['file', 'mimes:jpg,png,gif,webp', 'max:3072'],
+            'postcode' => 'postal-code:GB',
         ]);
         $path = null;
 
@@ -48,6 +50,8 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'picture' => $path,
+            'postcode' => $request->postcode,
+            'role' => $request->role,
         ]);
 
         event(new Registered($user));

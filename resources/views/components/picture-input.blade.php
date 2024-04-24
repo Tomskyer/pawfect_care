@@ -1,15 +1,6 @@
 <div class="flex items-center" x-data="picturePreview()">
     <div class="rounded-md bg-gray-200 mr-2">
-        @if(Auth::user())
-            @if(Auth::user()->picture != null)
-            <img id="preview" src="{{ asset(Auth::user()->picture) }}" alt="" class="w-24 h-24 rounded-md object-cover">
-            @else
-            <img id="preview" src="{{ url('/profile_pictures/default-user-avatar.webp') }}" alt="" class="w-24 h-24 rounded-md object-cover">
-            @endif
-        @else
-        <img id="preview" src="{{ url('/profile_pictures/default-user-avatar.webp') }}" alt="" class="w-24 h-24 rounded-md object-cover">
-        @endif
-
+        <x-profile-picture user="{{ Auth::user() }}" class="w-24 h-24 rounded-md object-cover"></x-profile-picture>
     </div>
     <div>
         <x-secondary-button @click="document.getElementById('picture').click()" class="relative">

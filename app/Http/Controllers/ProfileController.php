@@ -17,6 +17,22 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
+    public function view(Request $request, int $id): View
+    {
+        $users = User::where('id', $id)->get();
+
+        foreach($users as $user) {
+            $requested_user = $user;
+        }
+
+        return view('profile.view', [
+            'requested_user' => $requested_user,
+        ]);
+    }
+
+    /**
+     * Display the edit profile screen.
+     */
     public function edit(Request $request): View
     {
         return view('profile.edit', [
@@ -59,9 +75,11 @@ class ProfileController extends Controller
         ]);
 
         $user = $request->user();
+        
 
         Auth::logout();
-
+        
+        Storage::delete($user->picture);
         $user->delete();
 
         $request->session()->invalidate();

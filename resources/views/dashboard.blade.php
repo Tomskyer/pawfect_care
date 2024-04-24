@@ -19,59 +19,12 @@
         </div>
         @endforeach
         <?php
-        $postcode = "ST179TA";
-        $result = app('geocoder')->geocode($postcode)->get();
-        $coordinates = $result[0]->getCoordinates();
-        $lat = $coordinates->getLatitude();
-        $lng = $coordinates->getLongitude();
-
+        $auth_postcode = Auth::user()->postcode;
+        $result = app('geocoder')->geocode($auth_postcode)->get();
+        $auth_coordinates = $result[0]->getCoordinates();
+        $auth_lat = $auth_coordinates->getLatitude();
+        $auth_lng = $auth_coordinates->getLongitude();
         ?>
-        <div class="container mt-5">
-            <div id="map"></div>
-        </div>
-
-        <script type="text/javascript">
-            function initMap() {
-                const latLng1 = {
-                    lat: <?php echo $lat; ?>,
-                    lng: <?php echo $lng; ?>
-                };
-
-                const latLng2 = {
-                    lat: 0,
-                    lng: -50
-                };
-
-                const map = new google.maps.Map(document.getElementById("map"), {
-                    zoom: 16,
-                    center: latLng1,
-                });
-
-                new google.maps.Marker({
-                    position: latLng1,
-                    map,
-                    title: "Profile's Location",
-                });
-
-                new google.maps.Marker({
-                    position: latLng2,
-                    map,
-                    title: "Your Location",
-                    icon: {
-                        path: google.maps.SymbolPath.CIRCLE,
-                        scale: 10,
-                        fillOpacity: 1,
-                        strokeWeight: 2,
-                        fillColor: '#5384ED',
-                        strokeColor: '#ffffff',
-                    },
-                });
-
-            }
-
-            window.initMap = initMap;
-        </script>
-        <script type="text/javascript" src="https://maps.google.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&callback=initMap"></script>
     </div>
 
 </x-app-layout>

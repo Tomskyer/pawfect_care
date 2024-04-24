@@ -32,4 +32,7 @@
     </div>
 </body>
 
+<footer class="w-full h-20 bg-slate-600">
+
+</footer>
 </html>

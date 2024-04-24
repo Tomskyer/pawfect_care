@@ -40,7 +40,7 @@
                     <label for="age3">61 - 100</label><br><br>
                 </div> -->
                 
-                <input name="role" value="1" hidden />
+                <input name="role" value="{{ $role }}" hidden />
 
                 <!-- Password -->
                 <div class="mt-4">

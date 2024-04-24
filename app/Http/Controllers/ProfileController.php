@@ -78,8 +78,10 @@ class ProfileController extends Controller
         
 
         Auth::logout();
-        
-        Storage::delete($user->picture);
+
+        if ($user->picture != null) {
+            Storage::delete($request->user()->picture);
+        }
         $user->delete();
 
         $request->session()->invalidate();

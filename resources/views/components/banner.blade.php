@@ -1,7 +1,7 @@
 @props(['banner', 'header', 'desc'])
 
 <div class="relative">
-    <img class="h-auto w-full" src="{{ url('/images/banner3.webp') }}" alt="">
+    <img class="w-full" src="{{ url('/images/banner3.webp') }}" alt="">
     <div class="absolute inset-0 rounded-md"></div>
     <div class="absolute inset-0 flex items-center justify-center">
         <div class="flex flex-col items-center">

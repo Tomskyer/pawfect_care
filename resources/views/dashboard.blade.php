@@ -18,6 +18,7 @@
             </a>
         </div>
         @endforeach
+        <!-- filter -->
         <?php
         $auth_postcode = Auth::user()->postcode;
         $result = app('geocoder')->geocode($auth_postcode)->get();

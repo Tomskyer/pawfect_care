@@ -28,7 +28,7 @@ class DogProfileController extends Controller
         }
 
         return view('profile_dog.view', [
-            'requested_dog' => $requested_dog,
+            'dog' => $requested_dog,
         ]);
     }
 

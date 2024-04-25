@@ -14,6 +14,11 @@
                     </div>
                 </div>
             </div>
+            @if(Auth::user()->id == $requested_user->id)
+            <a href="{{ route('profile_dog.create') }}">
+                <button>Create Dog Profile</button>
+            </a>
+            @endif
             <?php
             $profile_postcode = $requested_user->postcode;
             $result = app('geocoder')->geocode($profile_postcode)->get();

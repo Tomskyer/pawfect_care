@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\CarerController;
+use App\Http\Controllers\DogProfileController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
+use App\Models\Dog;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,13 +24,19 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     $users = User::all();
+    $dogs = Dog::all();
 
     return view('dashboard', [
         'users' => $users,
+        'dogs' => $dogs,
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/view-profile-dog/{id}', [DogProfileController::class, 'view'])->name('profile_dog.view');
+    Route::get('/create-profile-dog', [DogProfileController::class, 'create'])->name('profile_dog.create');
+    Route::post('register-dog', [DogProfileController::class, 'store'])->name('register-dog');
+    Route::get('/edit-profile-dog', [DogProfileController::class, 'edit'])->name('profile_dog.edit');
     Route::get('/view-profile/{id}', [ProfileController::class, 'view'])->name('profile.view');
     Route::get('/edit-profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/edit-profile', [ProfileController::class, 'update'])->name('profile.update');

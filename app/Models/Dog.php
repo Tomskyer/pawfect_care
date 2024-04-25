@@ -4,12 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
-class RoleUser extends Model
+class Dog extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -17,7 +15,13 @@ class RoleUser extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'role_id',
-        'user_id',
+        'owner_id',
+        'name',
+        'gender',
+        'birthdate',
+        'size',
+        'neutered',
+        'about',
+        'picture',
     ];
 }

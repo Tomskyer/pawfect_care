@@ -127,25 +127,16 @@ class DogProfileController extends Controller
     /**
      * Delete the dog's account.
      */
-    // public function destroy(Request $request): RedirectResponse
-    // {
-    //     $request->validateWithBag('userDeletion', [
-    //         'password' => ['required', 'current_password'],
-    //     ]);
+    public function destroy(Request $request): RedirectResponse
+    {
+        $dogs = Dog::where('id', $request->id)->get();
 
-    //     $user = $request->user();
+        foreach ($dogs as $dog) {
+            $row = $dog;
+        }
 
+        $row->delete();
 
-    //     Auth::logout();
-
-    //     if ($user->picture != null) {
-    //         Storage::delete($request->user()->picture);
-    //     }
-    //     $user->delete();
-
-    //     $request->session()->invalidate();
-    //     $request->session()->regenerateToken();
-
-    //     return Redirect::to('/');
-    // }
+        return redirect()->back();
+    }
 }

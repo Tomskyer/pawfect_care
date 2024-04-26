@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\User;
 use App\Models\Dog;
+use App\Models\Service;
+use App\Models\UserService;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -28,9 +30,15 @@ class ProfileController extends Controller
 
         $dogs = Dog::where('owner_id', $id)->get();
 
+        $services = Service::all();
+
+        $users_services = UserService::where('user_id', $id)->get();
+
         return view('profile.view', [
             'requested_user' => $requested_user,
             'dogs' => $dogs,
+            'services' => $services,
+            'users_services' => $users_services
         ]);
     }
 

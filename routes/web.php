@@ -3,6 +3,7 @@
 use App\Http\Controllers\CarerController;
 use App\Http\Controllers\DogProfileController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use App\Models\Dog;
@@ -33,8 +34,11 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    Route::post('/service-store', [ServiceController::class, 'store'])->name('service.store');
+    Route::delete('/service-delete', [ServiceController::class, 'destroy'])->name('service.delete');
     Route::get('/view-profile-dog/{id}', [DogProfileController::class, 'view'])->name('profile_dog.view');
     Route::get('/create-profile-dog', [DogProfileController::class, 'create'])->name('profile_dog.create');
+    Route::delete('/delete-profile-dog', [DogProfileController::class, 'destroy'])->name('profile_dog.destroy');
     Route::post('register-dog', [DogProfileController::class, 'store'])->name('register-dog');
     Route::get('/edit-profile-dog', [DogProfileController::class, 'edit'])->name('profile_dog.edit');
     Route::get('/view-profile/{id}', [ProfileController::class, 'view'])->name('profile.view');

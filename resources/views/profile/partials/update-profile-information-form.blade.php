@@ -16,10 +16,10 @@
     <form method="POST" action="{{ route('profile.update') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
         @csrf
         @method('patch')
-
-        <x-input-label for="picture" :value="__('Profile Picture')" />
-        <x-picture-input />
-
+        <div>
+            <x-input-label for="picture" :value="__('Profile Picture')" />
+            <x-picture-input />
+        </div>
         <div>
             <x-input-label for="name" :value="__('Name')" />
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
@@ -48,6 +48,11 @@
                 @endif
             </div>
             @endif
+        </div>
+        <div>
+            <x-input-label for="postcode" :value="__('Postcode')" />
+            <x-text-input id="postcode" name="postcode" type="text" class="mt-1 block w-full" :value="old('postcode', $user->postcode)" required autofocus />
+            <x-input-error class="mt-2" :messages="$errors->get('postcode')" />
         </div>
 
         <div class="flex items-center gap-4">

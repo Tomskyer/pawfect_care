@@ -14,24 +14,46 @@
                     </div>
                 </div>
             </div>
-            @if(Auth::user()->id == $requested_user->id)
+            <div>
+                @foreach($dogs as $dog)
+                <div class="bg-white shadow-sm sm:rounded-lg">
+                    <a href='{{ url("/view-profile-dog/{$dog->id}") }}'>
+                        <div class="flex flex-row">
+                            <x-profile-picture-dog-other picture="{{ $dog->picture }}" class="rounded-md w-24 h-24"></x-profile-picture-dog-other>
+                            <div class="flex flex-col">
+                                <h1>{{ $dog->name }}</h1>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                @endforeach
+            </div>
+            @if(Auth::user()->id == $requested_user->id && Auth::user()->id == 1)
             <a href="{{ route('profile_dog.create') }}">
                 <button>Create Dog Profile</button>
             </a>
             @endif
             <?php
             $profile_postcode = $requested_user->postcode;
-            $result = app('geocoder')->geocode($profile_postcode)->get();
-            $profile_coordinates = $result[0]->getCoordinates();
-            $profile_lat = $profile_coordinates->getLatitude();
-            $profile_lng = $profile_coordinates->getLongitude();
+            $result1 = app('geocoder')->geocode($profile_postcode)->get();
+            if (isset($result1[0])) {
+                $profile_coordinates = $result1[0]->getCoordinates();
+                $profile_lat = $profile_coordinates->getLatitude();
+                $profile_lng = $profile_coordinates->getLongitude();
+            }
+
 
             $auth_postcode = Auth::user()->postcode;
-            $result = app('geocoder')->geocode($auth_postcode)->get();
-            $auth_coordinates = $result[0]->getCoordinates();
-            $auth_lat = $auth_coordinates->getLatitude();
-            $auth_lng = $auth_coordinates->getLongitude();
+            $result2 = app('geocoder')->geocode($auth_postcode)->get();
+            if (isset($result2[0])) {
+                $auth_coordinates = $result2[0]->getCoordinates();
+                $auth_lat = $auth_coordinates->getLatitude();
+                $auth_lng = $auth_coordinates->getLongitude();
+            }
+
             ?>
+
+            @if(isset($profile_coordinates) && isset($auth_coordinates))
             <div class="container mt-5">
                 <div id="map"></div>
             </div>
@@ -78,6 +100,9 @@
                 window.initMap = initMap;
             </script>
             <script type="text/javascript" src="https://maps.google.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&callback=initMap"></script>
+            @else
+            <h1 class="text-3xl flex flex-col items-center text-semibold">Postcode does not exist; cannot show location</h1>
+            @endif
         </div>
     </div>
 </x-app-layout>

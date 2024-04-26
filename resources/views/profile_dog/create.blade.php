@@ -1,5 +1,6 @@
 <x-app-layout>
     <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
+        <h1 class="text-3xl items-center text-semibold">Create a profile for your dog</h1>
         <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
             <form method="POST" action="{{ route('register-dog') }}" enctype="multipart/form-data">
                 @csrf
@@ -19,11 +20,11 @@
                         <x-input-error :messages="$errors->get('name')" class="mt-2" />
                     </div>
                     <!-- Gender selection -->
-                    <div class="block border-solid border-2 border-gray-300 rounded-md mt-6 p-2 hover:bg-gray-200">
-                        <input class="" type="radio" id="male" name="gender" value="male" checked>
+                    <div class="block rounded-md mt-8 p-2 hover:bg-gray-200">
+                        <input type="radio" id="male" name="gender" value="male" checked>
                         <label for="male">Male</label><br>
                     </div>
-                    <div class="block border-solid border-2 border-gray-300 rounded-md mt-6 p-2 hover:bg-gray-200">
+                    <div class="block rounded-md mt-8 p-2 hover:bg-gray-200">
                         <input type="radio" id="female" name="gender" value="female">
                         <label for="female">Female</label><br>
                     </div>

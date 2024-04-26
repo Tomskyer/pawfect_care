@@ -13,6 +13,9 @@ export default {
     theme: {
 
         extend: {
+            backgroundImage: {
+                'dog': "url('images/dog-background.jpg')"
+            },
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
                 'cavaet' : ['caveat-brush']

@@ -28,7 +28,7 @@
                 </div>
                 @endforeach
             </div>
-            @if(Auth::user()->id == $requested_user->id && Auth::user()->id == 1)
+            @if(Auth::user()->id == $requested_user->id && Auth::user()->role == 1)
             <a href="{{ route('profile_dog.create') }}">
                 <button>Create Dog Profile</button>
             </a>

@@ -18,6 +18,7 @@ class Dog extends Model
         'owner_id',
         'name',
         'gender',
+        'breed',
         'birthdate',
         'size',
         'neutered',

@@ -46,6 +46,11 @@
                     </div>
                 </div>
 
+                <div class="mt-4">
+                    <x-input-label for="breed" :value="__('Breed')" />
+                    <x-dog-breeds></x-dog-breeds>
+                </div>
+
                 <!-- About -->
                 <div class="mt-4">
                     <x-input-label for="about" :value="__('About (optional)')" />

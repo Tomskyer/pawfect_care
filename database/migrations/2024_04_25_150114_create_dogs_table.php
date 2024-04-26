@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer('owner_id')->unsigned();
             $table->string('name');
             $table->string('gender');
+            $table->string('breed');
             $table->date('birthdate');
             $table->float('size');
             $table->string('neutered');

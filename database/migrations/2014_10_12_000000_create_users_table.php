@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('picture')->nullable();
             $table->string('postcode');
             $table->integer('role');
+            $table->string('carer_verified')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -45,8 +45,13 @@ class RegisteredUserController extends Controller
         if ($request->hasFile('picture')) {
             $path = $request->file('picture')->storePublicly('profile_pictures');
         }
-        
 
+        $carer_verified = null;
+
+        if ($request->role == 2) {
+            $carer_verified = 'false';
+        }
+        
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -54,6 +59,7 @@ class RegisteredUserController extends Controller
             'picture' => $path,
             'postcode' => $request->postcode,
             'role' => $request->role,
+            'carer_verified' => $carer_verified,
         ]);
 
         event(new Registered($user));

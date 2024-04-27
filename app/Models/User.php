@@ -25,6 +25,7 @@ class User extends Authenticatable
         'picture',
         'postcode',
         'role',
+        'carer_verified',
     ];
 
     /**

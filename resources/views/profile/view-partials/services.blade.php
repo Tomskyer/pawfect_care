@@ -2,7 +2,6 @@
 @if($requested_user->role == 2)
 <div class="flex flex-col p-4 sm:p-8 bg-white shadow sm:rounded-lg">
     <h1 class="text-3xl text-semibold p-2">{{ $requested_user->name }}'s Services</h1>
-    @if($users_services != null)
     @foreach($users_services as $user_service)
     <div class="w-full flex flex-row justify-between sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
         <div class="flex flex-row justify-between w-full">
@@ -26,8 +25,8 @@
         @endif
     </div>
     @endforeach
-    @else
-    <p>please add services</p>
+    @if(count($users_services) == 0)
+    <p class="p-2">{{ $requested_user->name }} have no services currently</p>
     @endif
     @if(Auth::user()->id == $requested_user->id)
     @if(count($users_services) < 4) <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">

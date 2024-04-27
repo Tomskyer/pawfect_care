@@ -6,6 +6,8 @@
     </x-slot>
 
     <div class="max-w-5xl mx-auto p-6">
+
+        <!-- Owner view -->
         @foreach($users as $user)
         @if(Auth::user()->role == 1 && $user->role == 2)
         <div class="bg-white shadow-md sm:rounded-lg">
@@ -20,9 +22,16 @@
         </div>
         @endif
         @endforeach
-        @if(Auth::user()->role == 2)
-        @foreach($dogs as $dog)
 
+        <!-- Carer view -->
+        @if(Auth::user()->role == 2)
+        @if(Auth::user()->carer_verified == 'false')
+        <div class="w-full flex flex-col items-center">
+            <h1 class="text-3xl ext-semibold">A member of our staff team will need to verify you</h1>
+        </div>
+        @elseif(Auth::user()->carer_verified == 'pending')
+        @else
+        @foreach($dogs as $dog)
         <div class="bg-white shadow-md sm:rounded-lg">
             <a href='{{ url("/view-profile-dog/{$dog->id}") }}'>
                 <div class="flex flex-row">
@@ -33,6 +42,25 @@
                 </div>
             </a>
         </div>
+        @endforeach
+        @endif
+        @endif
+
+        <!-- Admin view -->
+        @if(Auth::user()->role == 3)
+        @foreach($users as $user)
+        @if($user->carer_verified == 'false' && $user->role == 2)
+        <div class="bg-white shadow-md sm:rounded-lg">
+            <a href='{{ url("/view-profile/{$user->id}") }}'>
+                <div class="flex flex-row">
+                    <x-profile-picture-other picture="{{ $user->picture }}" class="rounded-md w-24 h-24"></x-profile-picture-other>
+                    <div class="flex flex-col px-4 ">
+                        <h1>{{ $user->name }}</h1>
+                    </div>
+                </div>
+            </a>
+        </div>
+        @endif
         @endforeach
         @endif
     </div>

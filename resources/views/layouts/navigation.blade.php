@@ -12,9 +12,19 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                    @if(Auth::user()->role == 1)
+                    <x-nav-link :href="route('owner-dashboard')" :active="request()->routeIs('owner-dashboard')">
+                        {{ __('Carer Search') }}
                     </x-nav-link>
+                    @elseif(Auth::user()->role == 2)
+                    <x-nav-link :href="route('carer-dashboard')" :active="request()->routeIs('carer-dashboard')">
+                        {{ __('Dog Search') }}
+                    </x-nav-link>
+                    @elseif(Auth::user()->role == 3)
+                    <x-nav-link :href="route('admin-dashboard')" :active="request()->routeIs('admin-dashboard')">
+                        {{ __('Verify Carers') }}
+                    </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -70,9 +80,19 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+            @if(Auth::user()->role == 1)
+            <x-responsive-nav-link :href="route('owner-dashboard')" :active="request()->routeIs('owner-dashboard')">
+                {{ __('Carer Search') }}
             </x-responsive-nav-link>
+            @elseif(Auth::user()->role == 2)
+            <x-responsive-nav-link :href="route('carer-dashboard')" :active="request()->routeIs('carer-dashboard')">
+                {{ __('Dog Search') }}
+            </x-responsive-nav-link>
+            @elseif(Auth::user()->role == 3)
+            <x-responsive-nav-link :href="route('admin-dashboard')" :active="request()->routeIs('admin-dashboard')">
+                {{ __('Verify Carers') }}
+            </x-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->

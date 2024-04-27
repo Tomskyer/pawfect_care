@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         User::factory()
-            ->count(20)
+            ->count(10)
             ->create();
 
         DB::table('users')->insert([

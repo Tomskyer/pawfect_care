@@ -19,10 +19,14 @@ return new class extends Migration
             $table->string('password');
             $table->string('picture')->nullable();
             $table->string('postcode');
-            $table->integer('role');
+            $table->unsignedBigInteger('role');
             $table->string('carer_verified')->nullable();
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreign('role')
+                ->references('id')
+                ->on('roles');
         });
     }
 

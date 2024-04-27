@@ -13,10 +13,18 @@ return new class extends Migration
     {
         Schema::create('users_services', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->unsigned();
-            $table->integer('service_id')->unsigned();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('service_id');
             $table->float('price');
             $table->timestamps();
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users');
+
+            $table->foreign('service_id')
+                ->references('id')
+                ->on('services');
         });
     }
 

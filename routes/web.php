@@ -23,15 +23,35 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::get('/dashboard', function () {
+Route::get('/owner-dashboard', function () {
     $users = User::all();
     $dogs = Dog::all();
 
-    return view('dashboard', [
+    return view('owner-dashboard', [
         'users' => $users,
         'dogs' => $dogs,
     ]);
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified'])->name('owner-dashboard');
+
+Route::get('/carer-dashboard', function () {
+    $users = User::all();
+    $dogs = Dog::all();
+
+    return view('carer-dashboard', [
+        'users' => $users,
+        'dogs' => $dogs,
+    ]);
+})->middleware(['auth', 'verified'])->name('carer-dashboard');
+
+Route::get('/admin-dashboard', function () {
+    $users = User::all();
+    $dogs = Dog::all();
+
+    return view('admin-dashboard', [
+        'users' => $users,
+        'dogs' => $dogs,
+    ]);
+})->middleware(['auth', 'verified'])->name('admin-dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::post('/service-store', [ServiceController::class, 'store'])->name('service.store');

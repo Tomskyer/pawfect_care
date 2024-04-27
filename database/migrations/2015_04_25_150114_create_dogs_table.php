@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('dogs', function (Blueprint $table) {
             $table->id();
-            $table->integer('owner_id')->unsigned();
+            $table->unsignedBigInteger("owner_id");
             $table->string('name');
             $table->string('gender');
             $table->string('breed');
@@ -23,6 +23,10 @@ return new class extends Migration
             $table->string('about')->nullable();
             $table->string('picture')->nullable();
             $table->timestamps();
+
+            $table->foreign('owner_id')
+                ->references('id')
+                ->on('users');
         });
     }
 

@@ -78,6 +78,24 @@ class ProfileController extends Controller
     }
 
     /**
+     * Verifies carer.
+     */
+    public function verify(Request $request): RedirectResponse 
+    {
+        $users = User::where('id', $request->id)->get();
+
+        foreach($users as $u) {
+            $user = $u;
+        }
+
+        $user->fill(['carer_verified' => 'true']);
+
+        $user->save();
+
+        return redirect()->back()->with('status', 'carer-verified');
+    }
+
+    /**
      * Delete the user's account.
      */
     public function destroy(Request $request): RedirectResponse

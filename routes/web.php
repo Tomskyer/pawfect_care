@@ -45,6 +45,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/view-profile/{id}', [ProfileController::class, 'view'])->name('profile.view');
     Route::get('/edit-profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/edit-profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::patch('/verify-profile', [ProfileController::class, 'verify'])->name('profile.verify');
     Route::delete('/edit-profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 

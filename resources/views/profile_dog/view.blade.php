@@ -10,6 +10,12 @@
                     <x-primary-button-alt>View Owner Profile</x-primary-button-alt>
                 </a>
 
+                @if(Auth::user()->id == $dog->owner_id)
+                <a class="mt-4" href="{{ route('profile_dog.edit', ['id' => $dog->id]) }}">
+                    <x-secondary-button>Edit Dog Profile</x-secondary-button>
+                </a>
+                @endif
+
             </div>
             <div class="flex flex-col items-center p-4 sm:p-8 bg-white shadow-md sm:rounded-lg">
                 <div class="flex flex-row justify-between">
@@ -31,16 +37,16 @@
                     </div>
                 </div>
                 <div class="mt-4 border border-gray-300 rounded-md w-full">
-                @if(isset($dog->about))
-                
+                    @if(isset($dog->about))
+
                     <p class="text-gray-500 text-center">Description</p>
                     <p class="text-center p-4">{{ $dog->about }}</p>
-                    
-                @else
+
+                    @else
 
                     <p class="text-center p-4">No description available</p>
-                
-                @endif
+
+                    @endif
                 </div>
             </div>
         </div>

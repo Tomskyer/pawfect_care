@@ -38,9 +38,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/service-delete', [ServiceController::class, 'destroy'])->name('service.delete');
     Route::get('/view-profile-dog/{id}', [DogProfileController::class, 'view'])->name('profile_dog.view');
     Route::get('/create-profile-dog', [DogProfileController::class, 'create'])->name('profile_dog.create');
+    Route::get('/edit-profile-dog', [DogProfileController::class, 'edit'])->name('profile_dog.edit');
+    Route::patch('/edit-profile-dog', [DogProfileController::class, 'update'])->name('profile_dog.update');
     Route::delete('/delete-profile-dog', [DogProfileController::class, 'destroy'])->name('profile_dog.destroy');
     Route::post('register-dog', [DogProfileController::class, 'store'])->name('register-dog');
-    Route::get('/edit-profile-dog', [DogProfileController::class, 'edit'])->name('profile_dog.edit');
     Route::get('/view-profile/{id}', [ProfileController::class, 'view'])->name('profile.view');
     Route::get('/edit-profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/edit-profile', [ProfileController::class, 'update'])->name('profile.update');

@@ -39,14 +39,11 @@
 </body>
 
 <footer class="w-full bg-gray-800">
-    <div class="flex flex-row max-w-3xl mx-auto p-6">
-        <div class="flex flex-col items-center">
+        <div class="flex flex-col items-center mx-auto p-6">
             <h3 class="text-white font-bold">Pawfect Care</h3>
             <p class="text-gray-400 text-center">We connect dog owners with carers and facilitate safe places for your pups when you're away!</p>
-            <p class="opacity-50 text-xs mb-0 p-2 text-gray-500">Pawfect Care © 2024</p>
+            <p class="opacity-50 text-xs mb-0 pt-10 text-gray-500">Pawfect Care © 2024</p>
         </div>
-    </div>
-
 </footer>
 
 </html>

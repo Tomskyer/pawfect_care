@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
+use App\Http\Requests\DogProfileUpdateRequest;
 use App\Models\Dog;
 use App\Models\User;
 use Illuminate\Validation\Rule;
@@ -47,8 +47,14 @@ class DogProfileController extends Controller
      */
     public function edit(Request $request): View
     {
+        $dogs = Dog::where('id', $request->id)->get();
+
+        foreach ($dogs as $dog) {
+            $requested_dog = $dog;
+        }
+
         return view('profile_dog.edit', [
-            'user' => $request->user(),
+            'dog' => $requested_dog,
         ]);
     }
 
@@ -102,27 +108,36 @@ class DogProfileController extends Controller
     /**
      * Update the user's profile information.
      */
-    // public function update(ProfileUpdateRequest $request): RedirectResponse
-    // {
-    //     if ($request->user()->isDirty('email')) {
-    //         $request->user()->email_verified_at = null;
-    //     }
+    public function update(DogProfileUpdateRequest $request): RedirectResponse
+    {
+        $dogs = Dog::where('id', $request->id)->get();
 
-    //     if ($request->hasFile('picture')) {
-    //         if ($request->user()->picture != null) {
-    //             Storage::delete($request->user()->picture);
-    //         }
-    //         $path = $request->file('picture')->storePublicly('profile_pictures');
-    //         $request->user()->fill(['picture' => $path]);
-    //     }
+        foreach ($dogs as $d) {
+            $dog = $d;
+        }
 
-    //     $request->user()->fill($request->validated());
+        if ($request->hasFile('picture')) {
+            if ($dog->picture != null) {
+                Storage::delete($dog->picture);
+            }
+            $path = $request->file('picture')->storePublicly('dog_pictures');
+            $dog->fill(['picture' => $path]);
+        }
 
-    //     $request->user()->save();
+        if ($request->neutered != null) {
+            $neutered = 'true';
+        } else {
+            $neutered = 'false';
+        }
 
+        $dog->fill(['neutered' => $neutered]);
 
-    //     return Redirect::route('profile.edit')->with('status', 'profile-updated');
-    // }
+        $dog->fill($request->validated());
+
+        $dog->save();
+
+        return redirect()->back()->with('status', 'dog-profile-updated');
+    }
 
     /**
      * Delete the dog's account.

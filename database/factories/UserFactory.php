@@ -30,7 +30,7 @@ class UserFactory extends Factory
             'password' => static::$password ??= Hash::make('password'),
             'postcode' => \DivineOmega\Postcodes\Utils\Generator::generatePostcode(),
             'role' => rand(1, 2),
-            'carer_verified' => 'false',
+            'carer_verified' => rand(0, 1) ? 'false' : 'true',
             'remember_token' => Str::random(10),
         ];
     }

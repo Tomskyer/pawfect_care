@@ -1,4 +1,4 @@
-<x-app-layout >
+<x-app-layout>
     <div class="max-w-5xl mx-auto p-6 h-screen">
         <div class="flex flex-row items-center justify-between ">
             <h1 class="text-gray-600">Sorted by nearest</h1>

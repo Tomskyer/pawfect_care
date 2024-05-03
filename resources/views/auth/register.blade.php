@@ -10,7 +10,6 @@
                 @csrf
 
                 <!-- Picture -->
-                <!-- <x-picture-input /> -->
 
                 <!-- Name -->
                 <div class="mt-4">
